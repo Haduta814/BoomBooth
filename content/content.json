@@ -1,0 +1,300 @@
+{
+  "_about": "All words the booth says, shows or prints live in this file. Replace the placeholder text; keep the ids, keys and structure. Ids are referenced elsewhere in this file and in the logs, so rename an id only if you update every reference.",
+  "meta": {
+    "version": "0.1.0",
+    "booth_name": "BoomBooth",
+    "max_options_per_prompt": 3,
+    "silence_repeat_seconds": 8
+  },
+
+  "voices": {
+    "_about": "Each character speaks with one voice. 'voice_hint' is a short description passed to the text-to-speech service; the browser voice ignores it.",
+    "operator": { "name": "The Operator", "voice_hint": "calm, warm, unhurried switchboard operator" },
+    "class_1": { "name": "Class 1 character", "voice_hint": "placeholder voice description" },
+    "class_2": { "name": "Class 2 character", "voice_hint": "placeholder voice description" },
+    "class_3": { "name": "Class 3 character", "voice_hint": "placeholder voice description" },
+    "class_4": { "name": "Class 4 character", "voice_hint": "placeholder voice description" },
+    "echo": { "name": "Echo narrator", "voice_hint": "soft, distant narrator" }
+  },
+
+  "operator": {
+    "scan_prompt": "Hello. Tap your wristband on the reader to begin. Or press star to continue without scanning.",
+    "greeting_new": "Welcome to the booth. This call takes about two minutes, and you can hang up at any time.",
+    "greeting_returning": "Welcome back. I've kept your place.",
+    "greeting_anonymous": "Welcome. Nothing from this call will be linked to you. You can hang up at any time.",
+    "menu": {
+      "say": "Press 1 to find your class. Press 2 for a quest. Press 3 for help. Press 4 to listen to an echo. Press 5 to print your journey so far.",
+      "options": [
+        { "key": "1", "label": "Find your class", "goes_to": "quiz" },
+        { "key": "2", "label": "Quest", "goes_to": "quest" },
+        { "key": "3", "label": "Quest helper", "goes_to": "helper" },
+        { "key": "4", "label": "Echoes", "goes_to": "echoes" },
+        { "key": "5", "label": "Print my journey", "goes_to": "summary" }
+      ],
+      "_note": "The menu offers 5 options on purpose, read as a list. Every other prompt keeps to 3."
+    },
+    "controls_hint": "At any time, press 9 to hear that again, or 0 to come back to me.",
+    "not_understood": "Sorry, I didn't catch that. You can press a number instead.",
+    "confirm_template": "I think you said {option}. Press 1 if that's right, or 2 to choose again.",
+    "quiz_first": "Before your quest, let's find your class. It takes about a minute.",
+    "goodbye": "Thank you for calling. Hang up whenever you're ready."
+  },
+
+  "safety": {
+    "_about": "Fixed text, never generated. Plays when the safety option is chosen or when a distress word is heard. Agree the wording with Boomtown welfare.",
+    "message": "If you need help right now, the welfare tent is placeholder location. Any steward in a placeholder colour jacket can help you too.",
+    "trigger_words": ["help me", "emergency", "hurt", "unsafe", "lost my friend", "panic", "can't breathe", "ambulance"]
+  },
+
+  "classes": [
+    { "id": "class_1", "name": "Class 1", "description": "Placeholder: one sentence describing Class 1.", "character": "class_1" },
+    { "id": "class_2", "name": "Class 2", "description": "Placeholder: one sentence describing Class 2.", "character": "class_2" },
+    { "id": "class_3", "name": "Class 3", "description": "Placeholder: one sentence describing Class 3.", "character": "class_3" },
+    { "id": "class_4", "name": "Class 4", "description": "Placeholder: one sentence describing Class 4.", "character": "class_4" }
+  ],
+
+  "quiz": {
+    "_about": "Each answer adds points to one or more classes. The highest total wins. A tie goes to the class listed first in 'tie_break_order'.",
+    "intro": "Answer five quick questions. There are no wrong answers.",
+    "tie_break_order": ["class_1", "class_2", "class_3", "class_4"],
+    "result_template": "You are {class_name}. {class_description}",
+    "questions": [
+      {
+        "id": "q1",
+        "say": "Quiz question 1?",
+        "answers": [
+          { "key": "1", "label": "Answer 1A", "points": { "class_1": 2, "class_2": 1 } },
+          { "key": "2", "label": "Answer 1B", "points": { "class_3": 2 } },
+          { "key": "3", "label": "Answer 1C", "points": { "class_4": 2, "class_3": 1 } }
+        ]
+      },
+      {
+        "id": "q2",
+        "say": "Quiz question 2?",
+        "answers": [
+          { "key": "1", "label": "Answer 2A", "points": { "class_2": 2 } },
+          { "key": "2", "label": "Answer 2B", "points": { "class_4": 2, "class_1": 1 } },
+          { "key": "3", "label": "Answer 2C", "points": { "class_1": 2 } }
+        ]
+      },
+      {
+        "id": "q3",
+        "say": "Quiz question 3?",
+        "answers": [
+          { "key": "1", "label": "Answer 3A", "points": { "class_3": 2, "class_2": 1 } },
+          { "key": "2", "label": "Answer 3B", "points": { "class_1": 2 } },
+          { "key": "3", "label": "Answer 3C", "points": { "class_2": 2 } }
+        ]
+      },
+      {
+        "id": "q4",
+        "say": "Quiz question 4?",
+        "answers": [
+          { "key": "1", "label": "Answer 4A", "points": { "class_4": 2 } },
+          { "key": "2", "label": "Answer 4B", "points": { "class_2": 2, "class_3": 1 } },
+          { "key": "3", "label": "Answer 4C", "points": { "class_3": 2 } }
+        ]
+      },
+      {
+        "id": "q5",
+        "say": "Quiz question 5?",
+        "answers": [
+          { "key": "1", "label": "Answer 5A", "points": { "class_1": 1, "class_4": 1 } },
+          { "key": "2", "label": "Answer 5B", "points": { "class_2": 1, "class_3": 1 } },
+          { "key": "3", "label": "Answer 5C", "points": { "class_4": 2 } }
+        ]
+      }
+    ]
+  },
+
+  "needs": {
+    "_about": "Asked before a quest is given. Each answer sets one need. Spoken answers are matched to an option by the decision step; 'hints' are example words used by the free keyword fallback.",
+    "intro": "Three quick questions, so I can find the right quest for you.",
+    "questions": [
+      {
+        "id": "energy",
+        "say": "Would you like somewhere quiet, or somewhere busy? Press 1 for quiet, 2 for busy.",
+        "options": [
+          { "key": "1", "value": "quiet", "label": "Quiet", "hints": ["quiet", "calm", "peaceful", "chill", "not loud", "relaxed"] },
+          { "key": "2", "value": "busy", "label": "Busy", "hints": ["busy", "loud", "lively", "crowd", "party", "buzz"] }
+        ]
+      },
+      {
+        "id": "social",
+        "say": "On your own, or with other people? Press 1 for on my own, 2 for with others.",
+        "options": [
+          { "key": "1", "value": "solo", "label": "On my own", "hints": ["alone", "solo", "myself", "on my own", "just me"] },
+          { "key": "2", "value": "group", "label": "With others", "hints": ["group", "others", "people", "friends", "together", "team"] }
+        ]
+      },
+      {
+        "id": "length",
+        "say": "A short quest, or a longer one? Press 1 for short, 2 for longer.",
+        "options": [
+          { "key": "1", "value": "short", "label": "Short", "hints": ["short", "quick", "small", "fast", "tiny", "not long"] },
+          { "key": "2", "value": "long", "label": "Longer", "hints": ["long", "longer", "big", "proper", "whole", "adventure"] }
+        ]
+      }
+    ]
+  },
+
+  "routing": {
+    "_about": "How a quest branch is chosen. Within the visitor's class, every branch is scored against the visitor's needs: each matching tag adds its weight. Highest score wins. Weights are unequal on purpose, so there are never ties, and 'social' counts most because group quests can be off-putting. With no class yet, the visitor is sent to the quiz first.",
+    "weights": { "social": 4, "energy": 2, "length": 1 },
+    "quieter_swap": "When a visitor asks to swap to a quieter or easier quest, the next-highest scoring branch in their class with energy 'quiet' is chosen; if none, the next-highest scoring branch."
+  },
+
+  "branches": [
+    { "id": "c1_b1", "class": "class_1", "name": "Quest branch 1.1", "tags": { "energy": "quiet", "social": "solo", "length": "short" },
+      "intro": "Placeholder: the Class 1 character introduces quest branch 1.1.",
+      "steps": [
+        { "id": "c1_b1_s1", "say": "Quest branch 1.1, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c1_b1_s1" },
+        { "id": "c1_b1_s2", "say": "Quest branch 1.1, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c1_b1_s2" },
+        { "id": "c1_b1_s3", "say": "Quest branch 1.1, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c1_b1_s3" }
+      ],
+      "complete": "Placeholder: the Class 1 character congratulates you on finishing branch 1.1." },
+    { "id": "c1_b2", "class": "class_1", "name": "Quest branch 1.2", "tags": { "energy": "busy", "social": "solo", "length": "long" },
+      "intro": "Placeholder: the Class 1 character introduces quest branch 1.2.",
+      "steps": [
+        { "id": "c1_b2_s1", "say": "Quest branch 1.2, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c1_b2_s1" },
+        { "id": "c1_b2_s2", "say": "Quest branch 1.2, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c1_b2_s2" },
+        { "id": "c1_b2_s3", "say": "Quest branch 1.2, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c1_b2_s3" }
+      ],
+      "complete": "Placeholder: the Class 1 character congratulates you on finishing branch 1.2." },
+    { "id": "c1_b3", "class": "class_1", "name": "Quest branch 1.3", "tags": { "energy": "busy", "social": "group", "length": "short" },
+      "intro": "Placeholder: the Class 1 character introduces quest branch 1.3.",
+      "steps": [
+        { "id": "c1_b3_s1", "say": "Quest branch 1.3, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c1_b3_s1" },
+        { "id": "c1_b3_s2", "say": "Quest branch 1.3, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c1_b3_s2" },
+        { "id": "c1_b3_s3", "say": "Quest branch 1.3, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c1_b3_s3" }
+      ],
+      "complete": "Placeholder: the Class 1 character congratulates you on finishing branch 1.3." },
+
+    { "id": "c2_b1", "class": "class_2", "name": "Quest branch 2.1", "tags": { "energy": "quiet", "social": "solo", "length": "short" },
+      "intro": "Placeholder: the Class 2 character introduces quest branch 2.1.",
+      "steps": [
+        { "id": "c2_b1_s1", "say": "Quest branch 2.1, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c2_b1_s1" },
+        { "id": "c2_b1_s2", "say": "Quest branch 2.1, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c2_b1_s2" },
+        { "id": "c2_b1_s3", "say": "Quest branch 2.1, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c2_b1_s3" }
+      ],
+      "complete": "Placeholder: the Class 2 character congratulates you on finishing branch 2.1." },
+    { "id": "c2_b2", "class": "class_2", "name": "Quest branch 2.2", "tags": { "energy": "busy", "social": "solo", "length": "long" },
+      "intro": "Placeholder: the Class 2 character introduces quest branch 2.2.",
+      "steps": [
+        { "id": "c2_b2_s1", "say": "Quest branch 2.2, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c2_b2_s1" },
+        { "id": "c2_b2_s2", "say": "Quest branch 2.2, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c2_b2_s2" },
+        { "id": "c2_b2_s3", "say": "Quest branch 2.2, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c2_b2_s3" }
+      ],
+      "complete": "Placeholder: the Class 2 character congratulates you on finishing branch 2.2." },
+    { "id": "c2_b3", "class": "class_2", "name": "Quest branch 2.3", "tags": { "energy": "busy", "social": "group", "length": "short" },
+      "intro": "Placeholder: the Class 2 character introduces quest branch 2.3.",
+      "steps": [
+        { "id": "c2_b3_s1", "say": "Quest branch 2.3, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c2_b3_s1" },
+        { "id": "c2_b3_s2", "say": "Quest branch 2.3, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c2_b3_s2" },
+        { "id": "c2_b3_s3", "say": "Quest branch 2.3, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c2_b3_s3" }
+      ],
+      "complete": "Placeholder: the Class 2 character congratulates you on finishing branch 2.3." },
+
+    { "id": "c3_b1", "class": "class_3", "name": "Quest branch 3.1", "tags": { "energy": "quiet", "social": "solo", "length": "short" },
+      "intro": "Placeholder: the Class 3 character introduces quest branch 3.1.",
+      "steps": [
+        { "id": "c3_b1_s1", "say": "Quest branch 3.1, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c3_b1_s1" },
+        { "id": "c3_b1_s2", "say": "Quest branch 3.1, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c3_b1_s2" },
+        { "id": "c3_b1_s3", "say": "Quest branch 3.1, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c3_b1_s3" }
+      ],
+      "complete": "Placeholder: the Class 3 character congratulates you on finishing branch 3.1." },
+    { "id": "c3_b2", "class": "class_3", "name": "Quest branch 3.2", "tags": { "energy": "busy", "social": "solo", "length": "long" },
+      "intro": "Placeholder: the Class 3 character introduces quest branch 3.2.",
+      "steps": [
+        { "id": "c3_b2_s1", "say": "Quest branch 3.2, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c3_b2_s1" },
+        { "id": "c3_b2_s2", "say": "Quest branch 3.2, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c3_b2_s2" },
+        { "id": "c3_b2_s3", "say": "Quest branch 3.2, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c3_b2_s3" }
+      ],
+      "complete": "Placeholder: the Class 3 character congratulates you on finishing branch 3.2." },
+    { "id": "c3_b3", "class": "class_3", "name": "Quest branch 3.3", "tags": { "energy": "busy", "social": "group", "length": "short" },
+      "intro": "Placeholder: the Class 3 character introduces quest branch 3.3.",
+      "steps": [
+        { "id": "c3_b3_s1", "say": "Quest branch 3.3, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c3_b3_s1" },
+        { "id": "c3_b3_s2", "say": "Quest branch 3.3, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c3_b3_s2" },
+        { "id": "c3_b3_s3", "say": "Quest branch 3.3, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c3_b3_s3" }
+      ],
+      "complete": "Placeholder: the Class 3 character congratulates you on finishing branch 3.3." },
+
+    { "id": "c4_b1", "class": "class_4", "name": "Quest branch 4.1", "tags": { "energy": "quiet", "social": "solo", "length": "short" },
+      "intro": "Placeholder: the Class 4 character introduces quest branch 4.1.",
+      "steps": [
+        { "id": "c4_b1_s1", "say": "Quest branch 4.1, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c4_b1_s1" },
+        { "id": "c4_b1_s2", "say": "Quest branch 4.1, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c4_b1_s2" },
+        { "id": "c4_b1_s3", "say": "Quest branch 4.1, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c4_b1_s3" }
+      ],
+      "complete": "Placeholder: the Class 4 character congratulates you on finishing branch 4.1." },
+    { "id": "c4_b2", "class": "class_4", "name": "Quest branch 4.2", "tags": { "energy": "busy", "social": "solo", "length": "long" },
+      "intro": "Placeholder: the Class 4 character introduces quest branch 4.2.",
+      "steps": [
+        { "id": "c4_b2_s1", "say": "Quest branch 4.2, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c4_b2_s1" },
+        { "id": "c4_b2_s2", "say": "Quest branch 4.2, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c4_b2_s2" },
+        { "id": "c4_b2_s3", "say": "Quest branch 4.2, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c4_b2_s3" }
+      ],
+      "complete": "Placeholder: the Class 4 character congratulates you on finishing branch 4.2." },
+    { "id": "c4_b3", "class": "class_4", "name": "Quest branch 4.3", "tags": { "energy": "busy", "social": "group", "length": "short" },
+      "intro": "Placeholder: the Class 4 character introduces quest branch 4.3.",
+      "steps": [
+        { "id": "c4_b3_s1", "say": "Quest branch 4.3, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c4_b3_s1" },
+        { "id": "c4_b3_s2", "say": "Quest branch 4.3, step 2: placeholder instruction.", "where": "Placeholder location 2", "checkpoint": "cp_c4_b3_s2" },
+        { "id": "c4_b3_s3", "say": "Quest branch 4.3, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c4_b3_s3" }
+      ],
+      "complete": "Placeholder: the Class 4 character congratulates you on finishing branch 4.3." }
+  ],
+
+  "quest_flow": {
+    "step_prompt": "Press 1 when you've done this step. Press 2 to hear it again. Press 3 if you need help.",
+    "resume": "You're on {branch_name}, step {step_number} of {step_total}.",
+    "next_step": "Next: {step_say}",
+    "all_done": "You've finished every quest for your class. Press 4 from the main menu to hear an echo."
+  },
+
+  "helper": {
+    "_about": "The Quest helper. Answers are fixed text. 'action' topics do something instead of only speaking.",
+    "intro": "What do you need? Press 1 for what's next in my quest, 2 for an easier or quieter quest, 3 for more help.",
+    "topics": [
+      { "key": "1", "id": "whats_next", "label": "What's next in my quest", "action": "say_next_step" },
+      { "key": "2", "id": "swap_quieter", "label": "An easier or quieter quest", "action": "swap_quieter" },
+      { "key": "3", "id": "more", "label": "More help", "goes_to": "helper_more" }
+    ],
+    "more_intro": "Press 1 if you're lost, 2 for a quiet place, 3 for something else.",
+    "more_topics": [
+      { "key": "1", "id": "lost", "label": "I'm lost", "say": "Placeholder: how to find your way, for example the nearest landmark or info point." },
+      { "key": "2", "id": "quiet_place", "label": "A quiet place", "say": "Placeholder: where the nearest quiet area is." },
+      { "key": "3", "id": "other", "label": "Something else", "goes_to": "helper_other" }
+    ],
+    "other_intro": "Press 1 for how quests work, 2 for facilities, 3 if you need help right now.",
+    "other_topics": [
+      { "key": "1", "id": "how_quests_work", "label": "How quests work", "say": "Placeholder: one or two sentences on how quests work." },
+      { "key": "2", "id": "facilities", "label": "Facilities", "say": "Placeholder: toilets, water and first aid." },
+      { "key": "3", "id": "safety", "label": "I need help right now", "action": "safety" }
+    ],
+    "swap_done": "I've moved you to {branch_name}. Your progress so far is kept.",
+    "swap_none": "This is already the quietest quest for your class. Press 3 for more help."
+  },
+
+  "echoes": {
+    "_about": "Listen-only stories. 'unlock' controls when each becomes available: always, after_quiz, after_first_step or after_quest_complete.",
+    "intro": "Choose an echo to listen to.",
+    "locked": "That echo hasn't reached you yet. Keep questing.",
+    "items": [
+      { "key": "1", "id": "echo_1", "name": "Echo 1", "unlock": "always", "say": "Placeholder: the story told in Echo 1." },
+      { "key": "2", "id": "echo_2", "name": "Echo 2", "unlock": "after_quiz", "say": "Placeholder: the story told in Echo 2." },
+      { "key": "3", "id": "echo_3", "name": "Echo 3", "unlock": "after_first_step", "say": "Placeholder: the story told in Echo 3." },
+      { "key": "4", "id": "echo_4", "name": "Echo 4", "unlock": "after_quest_complete", "say": "Placeholder: the story told in Echo 4." }
+    ]
+  },
+
+  "summary": {
+    "_about": "The printed journey summary. The AI may only describe events from the visitor's log; it never adds story, places or quests. If the AI is off or fails, 'template' is used.",
+    "header": "BOOMBOOTH",
+    "subheader": "Your journey so far",
+    "ai_instructions": "Write 3 to 5 short sentences, warm and plain, describing what this visitor did, using only the events given. Mention their class, quests and steps done, echoes heard, and their next step. Do not invent places, characters, story or events. No more than 90 words.",
+    "template": "You are {class_name}. You have done {steps_done} quest steps on {branch_name}. Echoes heard: {echoes_heard}. Next: {next_step}.",
+    "footer": "Keep this slip. Your journey continues."
+  }
+}

@@ -1,0 +1,22 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node / tooling
+node_modules/
+.vercel/
+
+# Local data
+*.db
+*.sqlite
+
+# OS
+.DS_Store
+Thumbs.db
