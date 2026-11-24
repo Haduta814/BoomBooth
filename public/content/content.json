@@ -7,14 +7,27 @@
     "silence_repeat_seconds": 8
   },
 
+  "consent": {
+    "title": "Before you start",
+    "body": [
+      "This is a research prototype from the CDT in AI for Digital Media Inclusion hackathon.",
+      "If you take part, the booth logs what you press and choose, against a made-up wristband number. It does not log your name.",
+      "If you speak or type an answer, the words are logged so we can improve the wording. No audio is ever recorded or kept.",
+      "Logs are only used to find where the booth is confusing, and are deleted after Presentation Day.",
+      "Taking part is optional. You can stop at any time by hanging up."
+    ],
+    "agree": "I agree, start",
+    "decline": "No thanks"
+  },
+
   "voices": {
-    "_about": "Each character speaks with one voice. 'voice_hint' is a short description passed to the text-to-speech service; the browser voice ignores it.",
-    "operator": { "name": "The Operator", "voice_hint": "calm, warm, unhurried switchboard operator" },
-    "class_1": { "name": "Class 1 character", "voice_hint": "placeholder voice description" },
-    "class_2": { "name": "Class 2 character", "voice_hint": "placeholder voice description" },
-    "class_3": { "name": "Class 3 character", "voice_hint": "placeholder voice description" },
-    "class_4": { "name": "Class 4 character", "voice_hint": "placeholder voice description" },
-    "echo": { "name": "Echo narrator", "voice_hint": "soft, distant narrator" }
+    "_about": "Each character speaks with one voice. 'voice_hint' is the speaking style sent to the Gemini voice, and 'gemini_voice' is one of Gemini's prebuilt voice names (Zephyr, Puck, Charon, Kore, Fenrir, Leda, Orus, Aoede, Sulafat, Enceladus and others). The browser voice ignores both.",
+    "operator": { "name": "The Operator", "voice_hint": "calm, warm, unhurried switchboard operator", "gemini_voice": "Sulafat" },
+    "class_1": { "name": "Class 1 character", "voice_hint": "placeholder voice description", "gemini_voice": "Puck" },
+    "class_2": { "name": "Class 2 character", "voice_hint": "placeholder voice description", "gemini_voice": "Kore" },
+    "class_3": { "name": "Class 3 character", "voice_hint": "placeholder voice description", "gemini_voice": "Charon" },
+    "class_4": { "name": "Class 4 character", "voice_hint": "placeholder voice description", "gemini_voice": "Leda" },
+    "echo": { "name": "Echo narrator", "voice_hint": "soft, distant narrator", "gemini_voice": "Enceladus" }
   },
 
   "operator": {
@@ -37,7 +50,9 @@
     "not_understood": "Sorry, I didn't catch that. You can press a number instead.",
     "confirm_template": "I think you said {option}. Press 1 if that's right, or 2 to choose again.",
     "quiz_first": "Before your quest, let's find your class. It takes about a minute.",
-    "goodbye": "Thank you for calling. Hang up whenever you're ready."
+    "goodbye": "Thank you for calling. Hang up whenever you're ready.",
+    "silence_nudge": "Take your time. Here are the options again.",
+    "printing": "Printing your journey now. Take the slip from the printer."
   },
 
   "safety": {
@@ -161,7 +176,7 @@
         { "id": "c1_b2_s3", "say": "Quest branch 1.2, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c1_b2_s3" }
       ],
       "complete": "Placeholder: the Class 1 character congratulates you on finishing branch 1.2." },
-    { "id": "c1_b3", "class": "class_1", "name": "Quest branch 1.3", "tags": { "energy": "busy", "social": "group", "length": "short" },
+    { "id": "c1_b3", "class": "class_1", "name": "Quest branch 1.3", "tags": { "energy": "quiet", "social": "group", "length": "short" },
       "intro": "Placeholder: the Class 1 character introduces quest branch 1.3.",
       "steps": [
         { "id": "c1_b3_s1", "say": "Quest branch 1.3, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c1_b3_s1" },
@@ -186,7 +201,7 @@
         { "id": "c2_b2_s3", "say": "Quest branch 2.2, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c2_b2_s3" }
       ],
       "complete": "Placeholder: the Class 2 character congratulates you on finishing branch 2.2." },
-    { "id": "c2_b3", "class": "class_2", "name": "Quest branch 2.3", "tags": { "energy": "busy", "social": "group", "length": "short" },
+    { "id": "c2_b3", "class": "class_2", "name": "Quest branch 2.3", "tags": { "energy": "quiet", "social": "group", "length": "short" },
       "intro": "Placeholder: the Class 2 character introduces quest branch 2.3.",
       "steps": [
         { "id": "c2_b3_s1", "say": "Quest branch 2.3, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c2_b3_s1" },
@@ -211,7 +226,7 @@
         { "id": "c3_b2_s3", "say": "Quest branch 3.2, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c3_b2_s3" }
       ],
       "complete": "Placeholder: the Class 3 character congratulates you on finishing branch 3.2." },
-    { "id": "c3_b3", "class": "class_3", "name": "Quest branch 3.3", "tags": { "energy": "busy", "social": "group", "length": "short" },
+    { "id": "c3_b3", "class": "class_3", "name": "Quest branch 3.3", "tags": { "energy": "quiet", "social": "group", "length": "short" },
       "intro": "Placeholder: the Class 3 character introduces quest branch 3.3.",
       "steps": [
         { "id": "c3_b3_s1", "say": "Quest branch 3.3, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c3_b3_s1" },
@@ -236,7 +251,7 @@
         { "id": "c4_b2_s3", "say": "Quest branch 4.2, step 3: placeholder instruction.", "where": "Placeholder location 3", "checkpoint": "cp_c4_b2_s3" }
       ],
       "complete": "Placeholder: the Class 4 character congratulates you on finishing branch 4.2." },
-    { "id": "c4_b3", "class": "class_4", "name": "Quest branch 4.3", "tags": { "energy": "busy", "social": "group", "length": "short" },
+    { "id": "c4_b3", "class": "class_4", "name": "Quest branch 4.3", "tags": { "energy": "quiet", "social": "group", "length": "short" },
       "intro": "Placeholder: the Class 4 character introduces quest branch 4.3.",
       "steps": [
         { "id": "c4_b3_s1", "say": "Quest branch 4.3, step 1: placeholder instruction.", "where": "Placeholder location 1", "checkpoint": "cp_c4_b3_s1" },
@@ -273,6 +288,7 @@
       { "key": "2", "id": "facilities", "label": "Facilities", "say": "Placeholder: toilets, water and first aid." },
       { "key": "3", "id": "safety", "label": "I need help right now", "action": "safety" }
     ],
+    "no_quest": "You haven't started a quest yet. Press 0 for the main menu, then 2 for a quest.",
     "swap_done": "I've moved you to {branch_name}. Your progress so far is kept.",
     "swap_none": "This is already the quietest quest for your class. Press 3 for more help."
   },

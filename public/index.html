@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BoomBooth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Michroma&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="brand-mark" aria-hidden="true"></span>BoomBooth</div>
+  <p class="top-note">Research prototype · placeholder content</p>
+</header>
+
+<main class="stage">
+  <section class="booth" aria-label="Phone booth">
+    <div class="canopy" aria-hidden="true"><span class="lamp" id="lamp"></span></div>
+    <div class="sign">BOOMBOOTH<small>Public quest line</small></div>
+
+    <div class="console">
+      <div class="crt" id="crt">
+        <div class="crt-head">
+          <span id="speaker">Line idle</span>
+          <span class="crt-pill" id="callinfo"></span>
+        </div>
+        <p class="caption" id="caption" aria-live="polite">Pick up the handset to begin.</p>
+        <p class="sub" id="sub"></p>
+        <ol class="opts" id="options" aria-label="Options"></ol>
+        <p class="crt-foot" id="crtfoot"></p>
+      </div>
+
+      <div class="controls">
+        <button class="handset" id="handset" type="button" aria-pressed="false">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 8c-4 0-9 4-9 10 0 22 15 37 37 37 6 0 10-5 10-9v-6l-11-5-6 6c-7-3-13-9-16-16l6-6-5-11z" fill="currentColor"/></svg>
+          <span id="handset-label">Pick up</span>
+        </button>
+        <div class="keypad" role="group" aria-label="Keypad">
+          <button type="button" data-key="1">1</button>
+          <button type="button" data-key="2">2</button>
+          <button type="button" data-key="3">3</button>
+          <button type="button" data-key="4">4</button>
+          <button type="button" data-key="5">5</button>
+          <button type="button" data-key="6">6</button>
+          <button type="button" data-key="7">7</button>
+          <button type="button" data-key="8">8</button>
+          <button type="button" data-key="9" aria-label="9, repeat">9<small>repeat</small></button>
+          <button type="button" data-key="*" aria-label="Star">✱</button>
+          <button type="button" data-key="0" aria-label="0, Operator">0<small>operator</small></button>
+          <button type="button" data-key="#" aria-label="Hash">#</button>
+        </div>
+        <p class="kbd-hint">Your keyboard's number keys work too.</p>
+      </div>
+    </div>
+    <div class="plinth" aria-hidden="true"></div>
+  </section>
+
+  <aside class="side">
+    <section class="card reader" id="reader" aria-labelledby="reader-h">
+      <h2 id="reader-h">Wristband reader</h2>
+      <div class="band-wrap">
+        <div class="band" aria-hidden="true"><span class="chip"></span><span class="band-id" id="band-id-visual">WB-····</span></div>
+        <p class="band-text">Your wristband: <strong id="band-id">WB-····</strong></p>
+      </div>
+      <div class="row">
+        <button type="button" class="btn primary" id="tap" disabled>Tap to reader</button>
+        <button type="button" class="btn" id="newband">New wristband</button>
+      </div>
+      <details class="mini">
+        <summary>Use a wristband ID you already have</summary>
+        <form id="useband" class="row">
+          <label class="sr" for="bandinput">Wristband ID</label>
+          <input id="bandinput" autocomplete="off" placeholder="WB-AB12" maxlength="11" pattern="[Ww][Bb]-[A-Za-z0-9]{3,8}">
+          <button class="btn" type="submit">Use</button>
+        </form>
+      </details>
+    </section>
+
+    <section class="card say" aria-labelledby="say-h">
+      <h2 id="say-h">Say it or type it</h2>
+      <p class="hint">Optional. You can always press a number instead.</p>
+      <form id="freeform" class="row">
+        <button type="button" class="btn mic" id="mic" aria-pressed="false" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-2.1A7 7 0 0 0 19 12h-2z" fill="currentColor"/></svg>
+          <span id="mic-label">Speak</span>
+        </button>
+        <label class="sr" for="freetext">Type your answer</label>
+        <input id="freetext" autocomplete="off" placeholder="Type an answer…" maxlength="300" disabled>
+        <button class="btn" type="submit" id="send" disabled>Send</button>
+      </form>
+      <p class="heard" id="heard" aria-live="polite"></p>
+    </section>
+
+    <section class="card printer" aria-labelledby="printer-h">
+      <h2 id="printer-h">Printer</h2>
+      <div class="slot" aria-hidden="true"></div>
+      <div class="receipt-area" id="receipt-area">
+        <p class="hint" id="receipt-empty">Press 5 at the main menu to print your journey so far.</p>
+      </div>
+    </section>
+
+    <details class="card settings">
+      <summary>Settings</summary>
+      <fieldset>
+        <legend>Voice</legend>
+        <label><input type="radio" name="voice" value="off"> Captions only</label>
+        <label><input type="radio" name="voice" value="browser"> Browser voice</label>
+        <label><input type="radio" name="voice" value="gemini" id="voice-gemini"> Gemini voices</label>
+      </fieldset>
+      <fieldset>
+        <legend>Understanding speech and typing</legend>
+        <label><input type="radio" name="decide" value="ai" id="decide-ai"> Gemini</label>
+        <label><input type="radio" name="decide" value="keywords"> Keywords only (free)</label>
+      </fieldset>
+      <fieldset>
+        <legend>Printed summary</legend>
+        <label><input type="radio" name="summary" value="ai" id="summary-ai"> Written by Gemini</label>
+        <label><input type="radio" name="summary" value="template"> Template</label>
+      </fieldset>
+      <fieldset>
+        <legend>Text size</legend>
+        <label><input type="radio" name="size" value="normal"> Normal</label>
+        <label><input type="radio" name="size" value="large"> Large</label>
+      </fieldset>
+      <p class="hint" id="services">Checking services…</p>
+    </details>
+  </aside>
+</main>
+
+<div class="modal" id="consent" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="consent-h">
+    <h2 id="consent-h">Before you start</h2>
+    <ul id="consent-body"></ul>
+    <div class="row">
+      <button type="button" class="btn primary" id="agree">I agree, start</button>
+      <button type="button" class="btn" id="decline">No thanks</button>
+    </div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Filling in the content
 
-Everything the booth says, shows or prints is in [`content/content.json`](../content/content.json). You never need to touch the code to change the story.
+Everything the booth says, shows or prints is in [`public/content/content.json`](../public/content/content.json). You never need to touch the code to change the story.
 
 ## Rules
 
@@ -15,13 +15,15 @@ Everything the booth says, shows or prints is in [`content/content.json`](../con
 | Section | What it is | Count |
 | --- | --- | --- |
 | `voices` | Character names and a short voice description | 6 |
-| `operator` | The Operator's lines | about 12 |
+| `consent` | The consent screen shown before the scan | 1 |
+| `operator` | The Operator's lines | about 14 |
 | `safety.message` | Fixed welfare message; agree with Boomtown | 1 |
 | `classes` | Class names and one-line descriptions | 4 |
 | `quiz.questions` | 5 questions, 3 answers each, with points per class | 5 |
 | `needs` | Quiet/busy, solo/group, short/long questions | 3 |
 | `branches` | 3 quest branches per class, 3 steps each | 12 branches, 36 steps |
 | `helper` | Fixed answers for lost, quiet place, how quests work, facilities | 4 |
+| `quest_flow` | Step prompt, resume and next-step lines | 4 |
 | `echoes` | Listen-only stories and when they unlock | 4 |
 | `summary` | Printed slip header, footer and fallback template | 1 |
 
@@ -31,7 +33,7 @@ Everything the booth says, shows or prints is in [`content/content.json`](../con
 2. Each of the class's 3 branches has tags: quiet/busy, solo/group, short/long.
 3. Each tag that matches the visitor's answer adds its weight from `routing.weights` (solo/group 4, quiet/busy 2, short/long 1). The highest score wins.
 
-With the current tags, every class routes the same way:
+With the current tags (branch 1: quiet, solo, short · branch 2: busy, solo, long · branch 3: quiet, with others, short), every class routes the same way:
 
 | Quiet/busy | Solo/group | Short/long | Branch |
 | --- | --- | --- | --- |
@@ -43,6 +45,8 @@ With the current tags, every class routes the same way:
 | busy | solo | long | X.2 |
 | busy | group | short | X.3 |
 | busy | group | long | X.3 |
+
+With three branches per class, short/long only matters if you retag branches. It's still logged, so the panel shows what people asked for.
 
 To change who gets which quest, change a branch's `tags`, not the code.
 
